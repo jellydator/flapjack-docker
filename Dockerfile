@@ -5,10 +5,9 @@ RUN apk --no-cache add ca-certificates
 
 WORKDIR /root/
 
-ARG GITHUB_TOKEN
-ARG ASSET_ID
+ARG VERSION
 
-RUN wget -O ./flapjack --header="Authorization: Token ${GITHUB_TOKEN}" https://api.github.com/repos/jellydator/flapjack/releases/assets/${ASSET_ID}
+RUN wget -O ./flapjack https://download.jellydator.com/${VERSION:1}/flapjack_${VERSION:1}_linux_amd64
 
 RUN chmod +x ./flapjack
 
