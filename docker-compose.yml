@@ -1,0 +1,47 @@
+services:
+  flapjack:
+    # must use 'latest' so that watchtower could fetch new images
+    image: ghcr.io/jellydator/flapjack:latest
+    container_name: flapjack
+    ports:
+      - "8985:8985"
+    volumes:
+      - flapjack_data:/flapjack
+    command: engine run --no-browser -m
+    depends_on:
+      - grafana
+    restart: unless-stopped
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+      - "13340:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./config/grafana:/etc/grafana/provisioning
+    depends_on:
+      - prometheus
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - prometheus_data:/prometheus
+      - ./config/prometheus:/etc/prometheus/
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    restart: unless-stopped
+  watchtower:
+    image: containrrr/watchtower:latest
+    container_name: watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /root/.docker/config.json:/config.json
+    command: --interval 180 flapjack
+    restart: unless-stopped
+volumes:
+  flapjack_data:
+  grafana_data:
+  prometheus_data:
