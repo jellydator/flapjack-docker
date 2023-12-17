@@ -11,4 +11,4 @@ RUN wget -O ./flapjack https://download.jellydator.com/${VERSION:1}/flapjack_${V
 
 RUN chmod +x ./flapjack
 
-CMD ["./flapjack"]
+ENTRYPOINT ["./flapjack"]

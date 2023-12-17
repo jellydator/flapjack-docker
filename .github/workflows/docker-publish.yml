@@ -6,7 +6,6 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   build:
@@ -38,7 +37,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest,${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{github.event.client_payload.version}}
+          tags: ${{ env.REGISTRY }}/jellydator/${{ vars.IMAGE_NAME }}:latest,${{ env.REGISTRY }}/jellydator/${{ vars.IMAGE_NAME }}:${{github.event.client_payload.version}}
           cache-from: type=gha
           cache-to: type=gha,mode=max
           build-args: |
