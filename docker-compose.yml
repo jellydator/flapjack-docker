@@ -6,8 +6,8 @@ services:
     ports:
       - "8985:8985"
     volumes:
-      - flapjack_data:/flapjack
-    command: engine run --no-browser -m
+      - ./data:/data
+    command: engine run --no-browser -m -vvv -d /data -L /data
     depends_on:
       - grafana
     restart: unless-stopped
@@ -42,6 +42,5 @@ services:
     command: --interval 180 flapjack
     restart: unless-stopped
 volumes:
-  flapjack_data:
   grafana_data:
   prometheus_data:
