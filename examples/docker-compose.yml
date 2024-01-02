@@ -6,7 +6,7 @@ services:
     ports:
       - "8985:8985"
     volumes:
-      - ./data:/data
+      - flapjack_data:/data
     command: engine run --no-browser -m -vvv -d /data -L /data
     depends_on:
       - grafana
@@ -25,15 +25,13 @@ services:
   prometheus:
     image: prom/prometheus:latest
     container_name: prometheus
-    ports:
-      - "9090:9090"
     volumes:
       - prometheus_data:/prometheus
       - ./config/prometheus:/etc/prometheus/
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
     restart: unless-stopped
-  watchtower:
+  watchtower: # use watchtower to update flapjack whenever a new version comes out
     image: containrrr/watchtower:latest
     container_name: watchtower
     volumes:
@@ -42,5 +40,6 @@ services:
     command: --interval 180 flapjack
     restart: unless-stopped
 volumes:
+  flapjack_data:
   grafana_data:
   prometheus_data:
