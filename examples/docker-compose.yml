@@ -7,7 +7,6 @@ services:
       - "8985:8985"
     volumes:
       - flapjack_data:/data
-    command: engine run --no-browser -m -vvv -d /data -L /data
     depends_on:
       - grafana
     restart: unless-stopped

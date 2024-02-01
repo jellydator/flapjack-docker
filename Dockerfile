@@ -1,4 +1,3 @@
-# syntax=docker/dockerfile:1
 FROM alpine:3.19
 ARG FLAPJACK_VERSION=1.0.0
 
@@ -14,7 +13,9 @@ ENTRYPOINT [        \
 	"flapjack", \
 	"engine",   \
 	"run",      \
-	"--no-browser", \
+	"--no-browser" \
+]
+CMD [                   \
 	"-d", "/data",  \
 	"-L", "-",      \
 	"-vv",          \
