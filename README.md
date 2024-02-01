@@ -9,7 +9,9 @@ registry every time a new version of Flapjack comes out.
 1. Install [Docker](https://www.docker.com/).
 2. Download the Flapjack image from the public 
 [GitHub Packages registry](https://github.com/jellydator/flapjack-docker/pkgs/container/flapjack): 
-`docker pull ghcr.io/jellydator/flapjack`
+```
+docker pull ghcr.io/jellydator/flapjack
+```
 
 ### Usage
 ```
