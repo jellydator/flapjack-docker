@@ -1,8 +1,8 @@
 FROM alpine:3.19
-ARG FLAPJACK_VERSION=1.0.0
+ARG FLAPJACK_VERSION
 
 RUN apk add --no-cache ca-certificates
-RUN wget -O /usr/bin/flapjack https://download.jellydator.com/${FLAPJACK_VERSION:1}/flapjack_${FLAPJACK_VERSION:1}_linux_amd64 \
+RUN wget -O /usr/bin/flapjack https://download.jellydator.com/${FLAPJACK_VERSION:1}/flapjack-${FLAPJACK_VERSION:1}-linux64 \
 	&& chmod +x /usr/bin/flapjack \
 	&& flapjack version
 
